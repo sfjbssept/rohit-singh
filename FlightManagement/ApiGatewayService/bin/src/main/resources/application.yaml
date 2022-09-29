@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: api-gateway-service
+    
+  # gateway configurations
+  cloud:
+    gateway:
+      routes:
+        # Flight admin service
+        - id: FLIGHT-ADMIN-SERVICE
+          uri: lb://FLIGHT-ADMIN-SERVICE
+          predicates:
+          - Path=/flight-admin-service/**
+          filters:
+          - StripPrefix=1
+        # Flight user  service
+        - id: FLIGHT-USER-SERVICE
+          uri: lb://FLIGHT-USER-SERVICE
+          predicates:
+          - Path=/flight-user-service/**
+          filters:
+          - StripPrefix=1
+         # Flight booking  service
+        - id: FLIGHT-BOOKING-SERVICE
+          uri: lb://FLIGHT-BOOKING-SERVICE
+          predicates:
+          - Path=/flight-booking-service/**
+          filters:
+          - StripPrefix=1
+         
+    
+server:
+  port: 8090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      
+#actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,beans
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: ${spring.application.name}
+    description: Very cool Spring Boot application
+    version: '@project.version@'
+    spring-cloud-version: '@spring-cloud.version@'
+    spring-boot-version: '@project.parent.version@'
+  
