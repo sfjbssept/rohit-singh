@@ -31,5 +31,9 @@ public Employee(String empId, String name, int salary) {
 public Employee() {
 	super();
 }
+@Override
+public String toString() {
+	return "Employee [empId=" + empId + ", name=" + name + ", salary=" + salary + "]";
+}
  
 }

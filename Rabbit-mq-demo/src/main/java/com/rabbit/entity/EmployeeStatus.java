@@ -31,5 +31,9 @@ public String getMessage() {
 public void setMessage(String message) {
 	this.message = message;
 }
+@Override
+public String toString() {
+	return "EmployeeStatus [employee=" + employee + ", status=" + status + ", message=" + message + "]";
+}
  
 }
